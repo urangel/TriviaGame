@@ -1,103 +1,84 @@
 var pool = {
-    a: {
-        q1 : {
-            q: "",
-            c1: "",
-            c2: "",
-            c3: "",
-            c4: "",
-            a: ""
-        }
+    1: {
+        q: "question1",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "spaghetti"
     },
-    b: {
-        q2 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+
+    2: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    c: {
-        q3 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    3: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    d: {
-        q4 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    4: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    e: {
-        q5 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    5: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    f: {
-        q6 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    6: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    g: {
-        q7 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    7: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    h: {
-        q8 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    8: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    i: {
-        q9 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    9: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     },
-    j: {
-        q10 : {
-            q: "question",
-            c1: "choice1",
-            c2: "choice2",
-            c3: "choice3",
-            c4: "choice4",
-            a: "answer"
-        }
+    10: {
+        q: "question",
+        c1: "choice1",
+        c2: "choice2",
+        c3: "choice3",
+        c4: "choice4",
+        a: "answer"
     }
 
 }
@@ -108,38 +89,55 @@ var numCorrect;
 var numWrong;
 var guess = false;
 var countDownTimer;
+var position = 1;
 
 function beginGame() {
-    // hide start button
-    $(".start").hide();
-
-    //reveal question 1
     
-    //start timer for question 1
+    $(".start").hide();
+    $("input:radio").show();
+    $(".submit").show();
 
+    for (i=1; i<11; i++){
+        
+        if (position === 11){
+            $("#message").text("Quiz is over! Here are your stats: ");
+            $("#message").append(numCorrect + numWrong)
+        
+        }
+        
+        else {
+
+            $("#question").text(pool[i].q);
+            $("#choice1").text(pool[i].c1);
+            $("#choice2").text(pool[i].c2);
+            $("#choice3").text(pool[i].c3);
+            $("#choice4").text(pool[i].c4);
+            position++;
+
+            $("input: submit").on("click", function(){
+                
+                var choice = $("input: radio").checked.value;
+                $("#message").text("The answer was: " + pool[i].a)
+                $("#message").show();
+
+                // if pool[i].[radio button's (that is checked) value] === pool[i].a then
+                if (pool[i][c1]){
+                    numCorrect++;
+                }
+            });
+        }
+    }
 }
 
 $(document).ready(function() {
 
-$(".submit").hide();
+    $("input:radio").hide();
+    $(".submit").hide();
+    $("#message").hide();
 
-
-
-$(".start").on("click", function(){
-    begingGame();
-    
-})
-
-
-// will need if statement for if guess right or if guess wrong then increase counter
-
-if (guess = false){
-    numWrong++;
-
-}
-
-else if (guess = true){
-    numCorrect++;
-}
+    $(".start").on("click", function(){
+        beginGame();
+        
+    });
 
 });
