@@ -1,84 +1,93 @@
 var pool = {
     1: {
-        q: "Who's the best character?",
-        c1: "Doug",
-        c2: "Goku",
-        c3: "catdog",
-        c4: "nemo",
-        a: "Goku"
+        q: "In Hercules, Hades promised not to harm Megara provided that Hercules give up his strength. How long did he have to agree to give up his strength for?",
+        c1: "a fortnight",
+        c2: "60 Minutes",
+        c3: "24 Hours",
+        c4: "48 Hours",
+        a: "24 Hours"
     },
 
     2: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice4",
-        a: "choice1"
+        q: "In The Lion King, where was the birth of Simba celebrated?",
+        c1: "Savannah Cabana",
+        c2: "Pride Rock",
+        c3: "The Tree of Life",
+        c4: "Royal Peak",
+        a: "Pride Rock"
     },
     3: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "answer",
-        a: "answer"
+        q: "During the battle with Aladdin, what type of animal does Jafar transform himself into?",
+        c1: "Lion",
+        c2: "Tiger",
+        c3: "Bear",
+        c4: "Cobra",
+        a: "Cobra"
     },
     4: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "answer",
-        a: "answer"
+        q: "In the Little Mermaid when Ariel sees Prince Eric, what type of celebration was happening on the ship?",
+        c1: "Wedding",
+        c2: "Birthday Party",
+        c3: "Funeral",
+        c4: "Quinceañera",
+        a: "Birthday Party"
     },
     5: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "answer",
-        a: "answer"
+        q: "In The Sword in the Stone, what does Merlin call The Greatest Force on Earth? ",
+        c1: "Imagination",
+        c2: "Time",
+        c3: "Love",
+        c4: "Wisdom",
+        a: "Love"
     },
     6: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice4",
-        a: "answer"
+        q: "In Aladdin, what is the name of Jasmine’s pet tiger?",
+        c1: "Rajah",
+        c2: "Siddhartha",
+        c3: "Earl Gray",
+        c4: "Oolong",
+        a: "Rajah"
     },
     7: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice4",
-        a: "answer"
+        q: "Cruella de Vil is the villain in which Disney movie?",
+        c1: "Air Bud",
+        c2: "101 Dalmations",
+        c3: "8,675,309 Kittens",
+        c4: "The AristoCats",
+        a: "101 Dalmations"
     },
     8: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice4",
-        a: "answer"
+        q: "What is the name of the boy who owns Buzz Lightyear in the movie Toy Story?",
+        c1: "Billy",
+        c2: "Colby",
+        c3: "Tony",
+        c4: "Andy",
+        a: "Andy"
     },
     9: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice4",
-        a: "answer"
+        q: "In the movie Finding Nemo, which country has Nemo been taken to?",
+        c1: "Portugal",
+        c2: "The Upside Down",
+        c3: "Oz",
+        c4: "Australia",
+        a: "Australia"
     },
     10: {
-        q: "question",
-        c1: "choice1",
-        c2: "choice2",
-        c3: "choice3",
-        c4: "choice44",
-        a: "answer10"
+        q: "In the Disney movie Robin Hood, what type of animal was Robin?",
+        c1: "Red Panda",
+        c2: "Fox",
+        c3: "Ferret",
+        c4: "Hound",
+        a: "Fox"
+    },
+
+    11: {
+        q: "In the Disney movie Robin Hood, what type of animal was Robin?",
+        c1: "Red Panda",
+        c2: "Fox",
+        c3: "Ferret",
+        c4: "Hound",
+        a: "Fox"
     }
 
 }
@@ -88,17 +97,34 @@ var numCorrect = 0;
 var numWrong = 0;
 var countDownTimer = 30;
 var intervalId;
-var position = 1;
+var position = 10;
 var delay;
+
+function restart() {
+    choice = "";
+    numCorrect = 0;
+    numWrong = 0;
+    countDownTimer = 30;
+    intervalId;
+    position = 1;
+    delay;
+    
+    intervalId = setInterval(decrease, 1000);
+    
+    displayQuestion();
+
+    $("#message").hide();
+    $("#wins").hide();
+    $("#losses").hide();
+    $(".restart").hide();
+    $("input:radio").show();
+    $(".submit").show();
+}
 
 function decrease() {
 
     if (countDownTimer <= 0) {
-        console.log("time up");
-        numWrong++;
         hideQuestion();
-        $("input:radio").hide();
-        $(".submit").hide();
         timeUp();
         clearInterval(intervalId);
         delay = setTimeout(next, 5000);
@@ -110,40 +136,50 @@ function decrease() {
 }
 
 function next() {
-
+    
+    
+    if (position === 10){
+        $(".submit").hide();
+        $("input:radio").hide();
+        $("#message").text("Quiz is over! Here are your stats: ");
+        $("#message").show();
+        $("#wins").text("You got " + numCorrect + " questions correct!")
+        $("#losses").text("You got " + numWrong + " question(s) wrong... :(")
+        $(".restart").show();
+    
+    }
+    else {
     position++;
-    
     countDownTimer = 30;
-    
     intervalId = setInterval(decrease, 1000);
 
     displayQuestion();
 
     $(".start").hide();
     $("#message").hide();
-    $("input:radio").show();
-    $(".submit").show();
-    $(".next").hide();
+    }
+}
+
+function rightAnswer() {
+    $("#message").text("Correct!");
+    $("#message").show();
+    numCorrect++;
 }
 
 function wrongAnswer() {
-
+    numWrong++;
     $("#message").text("Wrong! The answer was: " + pool[position].a)
     $("#message").show();
-
 }
 
 function timeUp() {
-
+    numWrong++;
     $("#message").text("Time's up! The answer was: " + pool[position].a)
     $("#message").show();
-
 }
 
 function hideAnswer() {
-
     $("#message").hide();
-
 }
 
 function hideQuestion() {
@@ -155,6 +191,8 @@ function hideQuestion() {
     $("#choice4").hide();
    
     $("#timer").hide();
+    $("input:radio").hide();
+    $(".submit").hide();
 
 }
 
@@ -176,6 +214,9 @@ function displayQuestion() {
 
     $("#timer").show();
 
+    $("input:radio").show();
+    $(".submit").show();
+
 }
 
 
@@ -183,23 +224,23 @@ function displayQuestion() {
 function playRound() {
             
     if (choice === pool[position].a){
-        console.log("correct");
-        $("#message").text("Correct!");
-        $("#message").show();
-        numCorrect++;
-
+        rightAnswer();
     }
 
     else if (choice != pool[position].a){
-        console.log("wrong");
-        numWrong++;
         wrongAnswer();
-
     }                
           
 }
 
 $(document).ready(function() {
+
+    $(".restart").hide();
+
+    $(".restart").on("click", function(event){
+        event.preventDefault();
+        restart();
+    });
 
     $(".start").on("click", function(event){
         event.preventDefault();
@@ -212,15 +253,8 @@ $(document).ready(function() {
         $("#message").hide();
         $("input:radio").show();
         $(".submit").show();
-        $(".next").hide();
     
     });
-
-    // $(".next").on("click", function(event){
-    //     event.preventDefault();
-
-
-    // });
 
     $("input[type='submit']").click(function(event){
         event.preventDefault();
@@ -236,20 +270,7 @@ $(document).ready(function() {
 
     });
 
-    // $('input[type="radio"]').prop('checked', false);
-    // $('input.submit').prop('clicked', false);
-
     $("input:radio").hide();
     $(".submit").hide();
     $("#timer").hide();
-    $(".next").hide();
 });
-
-if (position === 11){
-    $(".submit").hide();
-    $("input:radio").hide();
-    $("#message").text("Quiz is over! Here are your stats: ");
-    $("#message").show();
-    $("#message").append(numCorrect + numWrong)
-
-}
