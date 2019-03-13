@@ -97,7 +97,7 @@ var numCorrect = 0;
 var numWrong = 0;
 var countDownTimer = 30;
 var intervalId;
-var position = 10;
+var position = 1;
 var delay;
 
 function restart() {
@@ -161,14 +161,14 @@ function next() {
 }
 
 function rightAnswer() {
-    $("#message").text("Correct!");
+    $("#message").text("You got it!");
     $("#message").show();
     numCorrect++;
 }
 
 function wrongAnswer() {
     numWrong++;
-    $("#message").text("Wrong! The answer was: " + pool[position].a)
+    $("#message").text("Shucks.. The answer was: " + pool[position].a)
     $("#message").show();
 }
 
@@ -264,7 +264,7 @@ $(document).ready(function() {
         $("input:radio").hide();
         clearInterval(intervalId);
         hideQuestion();
-        delay= setTimeout(next, 5000);
+        delay= setTimeout(next, 3500);
 
         playRound();
 

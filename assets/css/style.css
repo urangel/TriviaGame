@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "disney";
+    src: url(../css/waltograph/waltograph42.otf) format("truetype");
+}
+
 .box{
 
     width: 100%;
@@ -5,7 +10,35 @@
     background-image: linear-gradient(to bottom right, rgba(139,0,0,.2), rgba(139,0,0,1))
 
 }
-/* 
-#message {
-    display: none;
-} */
+
+body, html{
+    background-color: #000;
+    height: 100%;
+}
+
+#timer {
+    font-family: disney;
+    font-size: 3em;
+}
+
+input[type="radio"]{
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: disney;
+    font-size: 5em;
+    margin-top: 5vh;
+}
+
+h1, h2, h3, h4 {
+    color:whitesmoke;
+}
+
+.bg {
+    background-image: url(../images/disneyCastle.jpg);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
